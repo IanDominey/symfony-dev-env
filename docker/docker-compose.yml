@@ -2,17 +2,11 @@ version: '3'
 
 services:
   php-fpm:
-    build:
-      context: ..
-      dockerfile: ./docker/php-fpm/Dockerfile
-    image: kt-ab:php-fpm
-    environment:
-      - COMPOSER_DISABLE_XDEBUG_WARN=1
+    image: mrreasonable/symfony-dev-php-fpm
   nginx:
-    build:
-      context: ..
-      dockerfile: ./docker/nginx/Dockerfile
-    image: kt-ab:nginx
+    image: mrreasonable/php-dev-nginx
+    environment:
+      - NGINX_HOST=kt-ab.local www.kt-ab.local
     depends_on:
       - php-fpm
     links:
