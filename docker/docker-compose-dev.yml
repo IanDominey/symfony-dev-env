@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  php-fpm:
+    volumes:
+      - appcode-sync:/app:nocopy
+      - web-sync:/app/public:nocopy
+    environment:
+    - APP_DEBUG=true
+    - APP_ENV=dev
+  nginx:
+    volumes:
+      - web-sync:/app/public:nocopy
+volumes:
+  appcode-sync:
+    external: true
+  web-sync:
+    external: true
+  data:
+

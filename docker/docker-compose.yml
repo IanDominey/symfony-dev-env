@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  php-fpm:
+    build:
+      context: ..
+      dockerfile: ./docker/php-fpm/Dockerfile
+    image: kt-ab:php-fpm
+    environment:
+      - COMPOSER_DISABLE_XDEBUG_WARN=1
+  nginx:
+    build:
+      context: ..
+      dockerfile: ./docker/nginx/Dockerfile
+    image: kt-ab:nginx
+    depends_on:
+      - php-fpm
+    links:
+     - "php-fpm:php"
+    ports:
+      - 8080:80
