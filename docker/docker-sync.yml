@@ -9,20 +9,10 @@ syncs:
     src: '.'
     sync_userid: '82'
     sync_groupid: '82'
-    sync_excludes: ['/public', '/dev', '.git', 'docker', '.DS_Store', '.gitignore', '.idea', '.docker-sync', '.gitkeep', '*.iml']
+    sync_excludes: ['public', 'dev', '.git', 'docker', '.DS_Store', '.gitignore', '.idea', '.docker-sync', '.gitkeep', '*.iml']
     host_disk_mount_mode: 'cached'
   web-sync:
     src: './public'
     sync_userid: '82'
     sync_groupid: '82'
     host_disk_mount_mode: 'cached'
-  # git-sync:
-  #   sync_userid: '1000'
-  #   sync_groupid: '1000'
-  #   src: '.git'
-  #   host_disk_mount_mode: 'cached'
-  # jenkins-workspace-sync:
-  #   sync_userid: '1000'
-  #   sync_groupid: '1000'
-  #   src: './docker/data/jenkins'
-  #   host_disk_mount_mode: 'delegated'
