@@ -9,4 +9,4 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 BASENAME="$(basename $(dirname "$DIR" ) )"
 
-exec docker-compose -p ${BASENAME} -f "$DIR"/../docker/docker-compose.yml -f "$DIR"/../docker/docker-compose-dev.yml "$@"
+exec env COMPOSE_PROJECT_NAME=${BASENAME} docker-compose -p ${BASENAME} -f "$DIR"/../docker/docker-compose.yml -f "$DIR"/../docker/docker-compose-dev.yml "$@"

@@ -13,8 +13,10 @@ services:
       - web-sync:/app/public:nocopy
 volumes:
   appcode-sync:
-    external: true
+    external:
+      name: "${COMPOSE_PROJECT_NAME}-appcode-sync"
   web-sync:
-    external: true
+    external:
+      name: "${COMPOSE_PROJECT_NAME}-web-sync"
   data:
 
