@@ -8,4 +8,11 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-exec "$DIR"/docker-exec php -d memory_limit=-1 /usr/local/bin/composer "$@"
+BASENAME="$(basename $(dirname "$DIR" ) )"
+
+
+echo "Stopping containers"
+"$DIR"/docker-compose-dev stop
+
+echo "Stopping synchronised volumes"
+PROJECT_NAME=${BASENAME} docker-sync stop -c "$DIR"/../docker/docker-sync.yml
