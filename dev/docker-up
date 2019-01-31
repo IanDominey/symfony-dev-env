@@ -12,8 +12,10 @@ if [[ ! -d public ]]; then
     mkdir -p public
 fi
 
+BASENAME="$(basename $(dirname "$DIR" ) )"
+
 echo "Starting synchronised volumes.  Please be patient, this can take some time on first run."
-docker-sync start -c "$DIR"/../docker/docker-sync.yml
+PROJECT_NAME=${BASENAME} docker-sync start -c "$DIR"/../docker/docker-sync.yml
 
 echo "Starting containers"
 exec "$DIR"/docker-compose-dev up -d --remove-orphans "$@"

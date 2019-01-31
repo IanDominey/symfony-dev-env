@@ -10,11 +10,13 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
+BASENAME="$(basename $(dirname "$DIR" ) )"
+
 echo "Stopping and deleting containers"
 "$DIR"/docker-compose-dev down
 
 echo "Stopping synchronised volumes"
-docker-sync stop -c "$DIR"/../docker/docker-sync.yml
+PROJECT_NAME=${BASENAME} docker-sync stop -c "$DIR"/../docker/docker-sync.yml
 
 echo "Removing synchronised volumes"
-docker-sync clean -c "$DIR"/../docker/docker-sync.yml
+PROJECT_NAME=${BASENAME} docker-sync clean -c "$DIR"/../docker/docker-sync.yml
